@@ -19,7 +19,12 @@ export function newProductionClient(apiKey: string): Client {
 
 export async function request(
   client: Client,
-  method: string,
+  method:
+    | "GET"
+    | "POST"
+    | "PATCH"
+    | "PUT"
+    | "DELETE",
   path: string,
   body?: Record<string, unknown>,
 ): Promise<Record<string, unknown>> {
@@ -31,7 +36,7 @@ export async function request(
   const response = await fetch(url, {
     method,
     headers,
-    body: JSON.stringify(body),
+    body: body && JSON.stringify(body),
   });
   return response.json();
 }

@@ -4,19 +4,13 @@ import {
   newSandboxClient,
 } from "../lib/monoova_client.ts";
 
-function getAPIKey(): string {
+export function newClient(): Client {
   const apiKey: string | undefined = Deno.env.get("MONOOVA_API_KEY");
 
   if (apiKey === undefined) {
     console.error("MONOOVA_API_KEY is missing!");
     Deno.exit(1);
   }
-
-  return apiKey;
-}
-
-export function newClient(): Client {
-  const apiKey = getAPIKey();
 
   const env = getUserInput(
     "Please select environment:\n1. sandbox\n2. production\n>>",
